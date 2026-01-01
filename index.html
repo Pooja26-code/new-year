@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 ✨</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #0b1d3a, #020617);
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+  }
+
+  .gold-text {
+    background: linear-gradient(90deg, #f5d98f, #fbbf24, #f5d98f);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+
+  .page {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+    pointer-events: none;
+  }
+
+  .page.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .btn {
+    border: 1px solid #fbbf24;
+    padding: 12px 32px;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: #fbbf24;
+    color: #020617;
+    transform: translateY(-2px);
+  }
+
+  canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+</style>
+</head>
+
+<body class="text-white">
+
+<!-- ⭐ PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- 🎵 AUDIO -->
+<audio id="bgMusic" loop playsinline>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ▶ START OVERLAY -->
+<div id="overlay"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-pointer">
+  <p class="text-xl md:text-2xl tracking-widest gold-text">
+    Tap anywhere to start
+  </p>
+</div>
+
+<!-- 🌙 MAIN CONTENT -->
+<div class="relative z-10 h-screen flex items-center justify-center">
+
+  <!-- PAGE 1 -->
+  <section id="page1" class="page active text-center space-y-6 px-6">
+    <h1 class="text-4xl md:text-6xl gold-text font-light">
+      Happy New Year 2026
+    </h1>
+    <p class="opacity-80">A beautiful beginning, with you.</p>
+    <button class="btn" onclick="goPage(2)">Continue</button>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section id="page2" class="page text-center space-y-6 px-6">
+    <h2 class="text-3xl gold-text">Our Memories</h2>
+
+    <div class="w-64 h-40 mx-auto border border-yellow-400/40 rounded-lg
+                flex items-center justify-center opacity-70">
+      Image Placeholder
+    </div>
+
+    <p class="max-w-md mx-auto opacity-80">
+      Every shared smile, every quiet moment —
+      they all live here, with me.
+    </p>
+
+    <button class="btn" onclick="goPage(3)">Next</button>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section id="page3" class="page text-center space-y-6 px-6">
+    <h2 class="text-3xl gold-text">My Wish For You</h2>
+
+    <div class="max-w-md mx-auto p-6 border border-yellow-400/30 rounded-xl
+                hover:scale-105 transition">
+      <p class="opacity-90 leading-relaxed">
+        May this year protect your heart,
+        chase your dreams with you,
+        and give you moments that feel like magic —
+        even on ordinary days.
+      </p>
+    </div>
+
+    <button class="btn" onclick="goPage(4)">Final Page</button>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section id="page4" class="page text-center space-y-6 px-6">
+    <h2 class="text-3xl gold-text">Our Best Year Yet</h2>
+    <p id="countdown" class="text-xl tracking-widest"></p>
+    <button class="btn" onclick="goPage(1)">Replay ✨</button>
+  </section>
+
+</div>
+
+<script>
+/* ▶ MUSIC CONTROL */
+const music = document.getElementById("bgMusic");
+const overlay = document.getElementById("overlay");
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+  music.play().catch(e => console.log(e));
+});
+
+/* ▶ PAGE NAVIGATION */
+function goPage(n) {
+  document.querySelectorAll(".page").forEach(p =>
+    p.classList.remove("active")
+  );
+  document.getElementById("page" + n).classList.add("active");
+}
+
+/* ▶ COUNTDOWN */
+const countdown = document.getElementById("countdown");
+function updateCountdown() {
+  const target = new Date("January 1, 2026 00:00:00").getTime();
+  const now = Date.now();
+  const diff = target - now;
+
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  countdown.textContent = `${d}d ${h}h ${m}m ${s}s`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ⭐ PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+let w, h, stars;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+  stars = Array.from({ length: 120 }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.5,
+    s: Math.random() * 0.6 + 0.2
+  }));
+}
+window.addEventListener("resize", resize);
+resize();
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "rgba(255,255,255,0.8)";
+  stars.forEach(star => {
+    star.y += star.s;
+    if (star.y > h) star.y = 0;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
