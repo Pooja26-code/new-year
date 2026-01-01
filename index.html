@@ -88,9 +88,9 @@
   <!-- PAGE 1 -->
   <section id="page1" class="page active text-center space-y-6 px-6">
     <h1 class="text-4xl md:text-6xl gold-text font-light">
-      Happy New Year Bachhaaa 2026
+      Happy New Year Bachhaaaaa 2026
     </h1>
-    <p class="opacity-80">For my someone special❤️</p>
+    <p class="opacity-80">For my someone special❤️.</p>
     <button class="btn" onclick="goPage(2)">Continue</button>
   </section>
 
@@ -98,13 +98,15 @@
   <section id="page2" class="page text-center space-y-6 px-6">
     <h2 class="text-3xl gold-text">Pasandida Insan</h2>
 
-    <div class="w-64 h-40 mx-auto border border-yellow-400/40 rounded-lg
-                flex items-center justify-center opacity-70">
-      Image Placeholder
-    </div>
+    <div class="w-64 h-40 mx-auto rounded-lg overflow-hidden border border-yellow-400/40">
+  <img src="image.jpg"
+       alt="Image"
+       class="w-full h-full object-cover hover:scale-105 transition duration-500">
+</div>
+
 
     <p class="max-w-md mx-auto opacity-80">
-      This year I wish you gentle mornings, patience when nights are loud, and the quiet courage to start again. May every small step forward be celebrated. Happy New Year... I believe in you.
+     This year I wish you gentle mornings, patience when nights are loud, and the quiet courage to start again. May every small step forward be celebrated. Happy New Year... I believe in you.
     </p>
 
     <button class="btn" onclick="goPage(3)">Next</button>
@@ -112,12 +114,12 @@
 
   <!-- PAGE 3 -->
   <section id="page3" class="page text-center space-y-6 px-6">
-    <h2 class="text-3xl gold-text">My Wish For You</h2>
+    <h2 class="text-3xl gold-text">My Wish For My Bachhaaaa</h2>
 
     <div class="max-w-md mx-auto p-6 border border-yellow-400/30 rounded-xl
                 hover:scale-105 transition">
       <p class="opacity-90 leading-relaxed">
-       Tumhari ek muskurahat ke liye,
+        Tumhari ek muskurahat ke liye,
 Main apni har dua qurbaan kar sakta hoon.
 Naya saal tumhein woh sab de,
 Jo main kabhi lafzon mein keh nahi sakta. ✨
@@ -127,10 +129,23 @@ Jo main kabhi lafzon mein keh nahi sakta. ✨
     <button class="btn" onclick="goPage(4)">Final Page</button>
   </section>
 
-  <!-- PAGE 4 -->
+  <!-- ✅ PAGE 4 – THANK YOU PAGE -->
   <section id="page4" class="page text-center space-y-6 px-6">
-    <h2 class="text-3xl gold-text">Our Best Year Yet</h2>
-    <p id="countdown" class="text-xl tracking-widest"></p>
+    <h2 class="text-3xl gold-text">Thank You Bachaaa</h2>
+
+    <p class="max-w-md mx-auto opacity-90 leading-relaxed">
+      Thank you for being a part of my life,
+      my thoughts, and my quiet prayers.....
+      God bless you with all the happiness of this world.....
+      If this page made you smile even a little,
+      then it was worth creating.
+    </p>
+
+    <p class="italic opacity-70">
+      Here’s to more moments, more smiles,
+      and a year that feels gentle and kind.
+    </p>
+
     <button class="btn" onclick="goPage(1)">Replay ✨</button>
   </section>
 
@@ -153,23 +168,6 @@ function goPage(n) {
   );
   document.getElementById("page" + n).classList.add("active");
 }
-
-/* ▶ COUNTDOWN */
-const countdown = document.getElementById("countdown");
-function updateCountdown() {
-  const target = new Date("January 1, 2026 00:00:00").getTime();
-  const now = Date.now();
-  const diff = target - now;
-
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((diff / (1000 * 60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  countdown.textContent = `${d}d ${h}h ${m}m ${s}s`;
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
 
 /* ⭐ PARTICLES */
 const canvas = document.getElementById("particles");
